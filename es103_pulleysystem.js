@@ -38,7 +38,7 @@ function setup() {
   
   m2box = createInput();
   m2box.position(m1box.x,m1box.y+1.5*m1box.height);
-  m2box.value('0.501');
+  m2box.value('0.51');
   vellabel = createElement('body','right mass (kg)');
   vellabel.position(m2box.x+m2box.width,m2box.y);
   
@@ -52,7 +52,7 @@ function setup() {
   runbox.position(recbox.x,recbox.y+m1box.height*1.5);
   runlabel = createElement('body','Record Time (s)');
   runlabel.position(runbox.x+runbox.width,runbox.y);
-  runbox.value('3.0')
+  runbox.value('5.0')
   
   runbtn = createButton('Run Experiment');
   runbtn.position(runbox.x,runbox.y+runbox.height*1.5);
@@ -60,7 +60,7 @@ function setup() {
   
   
   
-  pulley = new PulleySystem(100,100,500);
+  pulley = new PulleySystem(100,100,250);
   
   pulleynote = createElement('h6','Steel pulley 0.01m thick, 0.05m radius');
   //filenote = createElement('body','datafile columns: [time, pulley angular velocity (rad/s)]')
@@ -104,15 +104,15 @@ function PulleySystem(ixo,iyo,iscale){
   this.r = 0.05;//m, pulley radius
   this.m = PI*pow(this.r,2)*this.thick*this.density;//mass
   this.J = this.m/2*pow(this.r,2);//kg-m^2, moment of inertia
-  this.b = 0.0025;// damping constant of bearing
+  this.b = 0.005;// damping constant of bearing
   this.tc = 0.000;//coulomb torque
   //bearing
   this.rinner = 0.01;//bearing radius.
   
   this.m1 = .5;
-  this.m2 = .501;
-  this.m1x = -.25;
-  this.m2x = -.25;
+  this.m2 = .51;
+  this.m1x = -.5;
+  this.m2x = -.5;
   
   //dynamic variables
   this.theta = 0;
@@ -181,7 +181,7 @@ function PulleySystem(ixo,iyo,iscale){
   
   this.stateDerivs = function(th,thd){
     if(1){
-      thdd=1.0/(this.J+(pow(this.r),2)*(this.m1+this.m2))*(-this.b*thd-this.tc*sign(this.thd) +9.81*this.r*(this.m1-this.m2));
+      thdd=1.0/(this.J+pow(this.r,2)*(this.m1+this.m2))*(-this.b*thd-this.tc*sign(this.thd) +9.81*this.r*(this.m1-this.m2));
       //thdd=1.0/(this.J)*(-this.b*thd);
     }
     else{
@@ -332,8 +332,8 @@ function setRec(){
 }
 
 function resetBlocks(){
-  pulley.m1x=-0.25;
-  pulley.m2x=-0.25;
+  pulley.m1x=-0.5;
+  pulley.m2x=-0.5;
   pulley.theta = 0;
   holdmasses=true;
 }
