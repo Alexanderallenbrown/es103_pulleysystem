@@ -34,11 +34,11 @@ function setup() {
   resetbutton.mousePressed(resetBlocks);
   m1label = createElement('body', 'left mass (kg)');
   m1label.position(m1box.x+m1box.width, m1box.y);
-  m1box.value('0.5');
+  m1box.value('0.51');
   
   m2box = createInput();
   m2box.position(m1box.x,m1box.y+1.5*m1box.height);
-  m2box.value('0.51');
+  m2box.value('0.5');
   vellabel = createElement('body','right mass (kg)');
   vellabel.position(m2box.x+m2box.width,m2box.y);
   
